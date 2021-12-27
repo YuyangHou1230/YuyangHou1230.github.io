@@ -12,10 +12,10 @@
   <meta name="description" content="这是零度的私人博客" />
 
   
-  <link type="text/css" rel="stylesheet" href="http://YuyangHou1230.github.io/css/print.css" media="print">
-  <link type="text/css" rel="stylesheet" href="http://YuyangHou1230.github.io/css/poole.css">
-  <link type="text/css" rel="stylesheet" href="http://YuyangHou1230.github.io/css/syntax.css">
-  <link type="text/css" rel="stylesheet" href="http://YuyangHou1230.github.io/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="https://yuyanghou1230.github.io/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="https://yuyanghou1230.github.io/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="https://yuyanghou1230.github.io/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="https://yuyanghou1230.github.io/css/hyde.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
 
 
@@ -24,7 +24,7 @@
   <link rel="shortcut icon" href="/favicon.png">
 
   
-  <link href="http://YuyangHou1230.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Hyy Blog" />
+  <link href="https://yuyanghou1230.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Hyy Blog" />
   
 </head>
 
@@ -32,7 +32,7 @@
   <aside class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="http://YuyangHou1230.github.io/"><h1>Hyy Blog</h1></a>
+      <a href="https://yuyanghou1230.github.io/"><h1>Hyy Blog</h1></a>
       <p class="lead">
        这是零度的私人博客 
       </p>
@@ -40,8 +40,8 @@
 
     <nav>
       <ul class="sidebar-nav">
-        <li><a href="http://YuyangHou1230.github.io/">Home</a> </li>
-        <li><a href="https://github.com/YuyangHou1230/"> Github </a></li><li><a href="https://www.linkedin.com/in/username/"> LinkedIn </a></li>
+        <li><a href="https://yuyanghou1230.github.io/">Home</a> </li>
+        <li><a href="https://www.bilibili.com/"> bilibili </a></li><li><a href="https://github.com/YuyangHou1230/"> Github </a></li>
       </ul>
     </nav>
 
@@ -51,7 +51,27 @@
 
     <main class="content container">
     <div class="posts">
-
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://yuyanghou1230.github.io/post/first/">First</a>
+  </h1>
+  <time datetime="2021-09-18T11:14:27&#43;0800" class="post-date">Sat, Sep 18, 2021</time>
+  Hello hugo  aaa bbb ccc  
+  
+</article><article class="post">
+  <h1 class="post-title">
+    <a href="https://yuyanghou1230.github.io/post/git/">Second</a>
+  </h1>
+  <time datetime="2021-09-18T11:14:27&#43;0800" class="post-date">Sat, Sep 18, 2021</time>
+  GIT教程  QPushButton-paintEvent 源码分析
+ void QPushButton::paintEvent(QPaintEvent *) { QStylePainter p(this); QStyleOptionButton option; initStyleOption(&amp;option); p.drawControl(QStyle::CE_PushButton, option); }  调用关系
+  调用QStylePainter的内联函数  inline void drawControl(QStyle::ControlElement ce, const QStyleOption &amp;opt); // 私有成员变量 private: QWidget *widget; QStyle *wstyle; // 定义 void QStylePainter::drawControl(QStyle::ControlElement ce, const QStyleOption &amp;opt) { wstyle-&gt;drawControl(ce, &amp;opt, this, widget); }  调用QStyle的纯虚函数  virtual void drawControl(ControlElement element, const QStyleOption *opt, QPainter *p, const QWidget *w = nullptr) const = 0; // 定义 void QCommonStyle::drawControl(ControlElement element, const QStyleOption *opt, QPainter *p, const QWidget *widget) const { Q_D(const QCommonStyle); switch (element) { case CE_PushButton: if (const QStyleOptionButton *btn = qstyleoption_cast&lt;const QStyleOptionButton *&gt;(opt)) { proxy()-&gt;drawControl(CE_PushButtonBevel, btn, p, widget); QStyleOptionButton subopt = *btn; subopt.
+  
+  <div class="read-more-link">
+    <a href="/post/git/">Read More…</a>
+  </div>
+  
+</article>
 </div>
     </main>
 
