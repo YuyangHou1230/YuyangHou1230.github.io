@@ -76,7 +76,7 @@
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/24/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2023-10-24T06:27:15.418Z" itemprop="datePublished">2023-10-24</time>
+  <time class="dt-published" datetime="2023-10-24T08:52:37.719Z" itemprop="datePublished">2023-10-24</time>
 </a>
     
   </div>
@@ -112,7 +112,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/24/hello-world/" data-id="clo3y2ssq0002j0na46iw45hu" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/24/hello-world/" data-id="clo439l4w0002l3om0hy4d3yz" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -127,7 +127,7 @@
     <article id="post-树莓派安装hexo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85hexo/" class="article-date">
-  <time class="dt-published" datetime="2023-10-24T06:27:15.418Z" itemprop="datePublished">2023-10-24</time>
+  <time class="dt-published" datetime="2023-10-24T08:52:37.719Z" itemprop="datePublished">2023-10-24</time>
 </a>
     
   </div>
@@ -150,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85hexo/" data-id="clo3y2ssr0003j0na2ly5acki" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85hexo/" data-id="clo439l4y0003l3omedbd71qs" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -189,14 +189,19 @@
 <h2 id="效果预览"><a href="#效果预览" class="headerlink" title="效果预览"></a>效果预览</h2><p><img src="https://cdn.statically.io/gh/YuyangHou1230/BlogImg@main/image.39tugfz3bgu0.webp" alt="新建博客"></p>
 <h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
 <h2 id="github-actions"><a href="#github-actions" class="headerlink" title="github actions"></a>github actions</h2><p>github actions分为两个部分的配置文件，一个部分是新建博客，另一个是部署博客</p>
-<h3 id="新建博客"><a href="#新建博客" class="headerlink" title="新建博客"></a>新建博客</h3><p>新建博客是借助github actions的手动运行功能，通过在运行时输入博客标题，利用github actions在虚拟机中使用hexo new 生成对应的文章 然后再使用git push 更新当前仓库。</p>
-<h3 id="自动部署"><a href="#自动部署" class="headerlink" title="自动部署"></a>自动部署</h3><p>自动部署则是结束userName.github.io这个仓库来完成，首先要新建一个你对应的仓库。</p>
-<p>新建博客需要我们在github的仓库里 点击actions ，手动运行New Blog的action进行运行</p>
-
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>我首先对整个实现的原理做一个简单的介绍，也让大家能明白每一步是在干什么。要实现这样的效果首先需要创建两个github仓库，一个仓库用于存放hexo生成的博客源码目录（下面统称为源码仓库），建议为私有的，保护隐私；另一个仓库用于存放hexo生成的网页渲染文件（下面统称为网页仓库）。</p>
+<p>通过github actions监控源码仓库的变动，自动在容器中更新文件，再更新到网页仓库，以达到自动部署的效果。</p>
+<blockquote>
+<p>注意：网页仓库是利用github page的功能，其仓库名必须是用户名.github.io, 例如我的是yuyanghou1230.github.io.</p>
+</blockquote>
+<h3 id="新建博客功能"><a href="#新建博客功能" class="headerlink" title="新建博客功能"></a>新建博客功能</h3><p>新建博客是借助github actions的手动运行功能，通过在运行时输入博客标题，利用github actions在虚拟机中使用hexo new 生成对应的文章 然后再使用git push 更新当前仓库。</p>
+<h3 id="自动部署功能"><a href="#自动部署功能" class="headerlink" title="自动部署功能"></a>自动部署功能</h3><p>自动部署则是当源码仓库更新时，会将源码仓库的文件自动download自动地在容器中调用hexo generate 命令，重新生成网页样式文件，然后push到userName.github.io这个仓库。</p>
+<h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><p>首先需要注意的是，所有涉及到的actions都是在源码仓库中,网页仓库仅仅用于存放网页渲染的代码，平时不需要我们去管理。<br>除操作的电脑外，需要准备一台linux服务器（我使用的是树莓派，其他的云服务器也可以，原理相同），一个github账号</p>
+<h3 id="在服务器上安装Hexo"><a href="#在服务器上安装Hexo" class="headerlink" title="在服务器上安装Hexo"></a>在服务器上安装Hexo</h3><h4 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h4><h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><h4 id="初始化博客"><a href="#初始化博客" class="headerlink" title="初始化博客"></a>初始化博客</h4><h3 id="github工作"><a href="#github工作" class="headerlink" title="github工作"></a>github工作</h3><h4 id="搭建仓库"><a href="#搭建仓库" class="headerlink" title="搭建仓库"></a>搭建仓库</h4><h4 id="添加变量"><a href="#添加变量" class="headerlink" title="添加变量"></a>添加变量</h4><h4 id="添加workflow配置文件"><a href="#添加workflow配置文件" class="headerlink" title="添加workflow配置文件"></a>添加workflow配置文件</h4><h4 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h4><h4 id="推送服务器代码至源码仓库"><a href="#推送服务器代码至源码仓库" class="headerlink" title="推送服务器代码至源码仓库"></a>推送服务器代码至源码仓库</h4><h4 id="看效果"><a href="#看效果" class="headerlink" title="看效果"></a>看效果</h4>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/24/New-Blog/" data-id="clo3y2ssh0000j0na5sjq7pqs" data-title="Hexo+github actions完成个人博客的自动部署" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/24/New-Blog/" data-id="clo439l4p0000l3om9c3jcsdg" data-title="Hexo+github actions完成个人博客的自动部署" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -235,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/10/20/Test/" data-id="clo3y2ssn0001j0na68sn4y7n" data-title="Test" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/10/20/Test/" data-id="clo439l4v0001l3omct7xb9z2" data-title="Test" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
